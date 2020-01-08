@@ -1,0 +1,23 @@
+﻿@page "/fetchdata"
+@using Models
+@using System.Linq
+@using ComponentLibrary
+@inject HttpClient Http
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <WeatherForecastComponent Forecasts="forecasts"/>
+}
+
+@code {
+    private IList<WeatherForecast> forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = (await Http.GetJsonAsync<WeatherForecast[]>("sample-data/weather.json")).ToList();
+    }
+}

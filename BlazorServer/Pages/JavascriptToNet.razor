@@ -1,0 +1,17 @@
+@page "/jstonet"
+
+<h1>
+    Javascript to .NET example
+</h1>
+
+<button type="button" class="btn btn-primary" onclick="returnArrayAsyncJs()">
+    Trigger .NEt static method ReturnArrayAsync
+</button>
+
+@code {
+    [JSInvokable]
+    public static Task<int[]> ReturnArrayAsync()
+    {
+         return Task.FromResult(new int[] { 1, 2, 3 });
+    }
+}
